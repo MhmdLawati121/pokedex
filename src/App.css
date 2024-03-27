@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+body {
+  background-color: #f2f2f2;
+  font-family: Work Sans, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  margin: 5vh 5vw;
+  background-color: #fef7f5;
+  border-radius: 12px;
+  padding: 5vh 5vw;
+  column-gap: 3vw;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.sidebar {
+  background-color: #f2f2f2;
+  padding: 5vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
+  row-gap: 40px;
+}
+
+.card {
+  display: grid;
+  justify-items: center;
+  padding: 1vh 1vw;
+  transition: transform 0.3s ease;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: translateY(-15px);
+}
+
+.card img {
+  width: 75%;
+}
+
+.type {
+  position: relative;
+  top: 1vw;
+  background-color: red;
   color: white;
+  padding: 0px 4rem;
+  font-size: 1.3rem;
 }
 
-.App-link {
-  color: #61dafb;
+h1 {
+  font-size: 2rem;
+  margin: 0;
+  background-color: transparent;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h3 {
+  margin: 0;
+  background-color: transparent;
+}
+
+/*-----------*/
+
+.evolutions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.evolution img {
+  width: 40px;
+  border: 1px solid red;
+  border-radius: 50%;
+  padding: 10%;
 }
