@@ -1,26 +1,41 @@
 // Pokemon Image
-function Image({ name, number }) {
+function Image({ name, number, url }) {
   return (
     <img
-      src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${number}.png`}
+      src={url}
       alt={name}
     ></img>
   );
 }
 
 // Pokemon Card
-function Card({ name, number, types }) {
+export function Card({ name, number, types, url }) {
+
   let cardBorderColor, typeBackground;
   const typeColors = {
-    fire: "rgba(255,0,0,1)",
-    grass: "rgba(0,255,0,1)",
-    water: "rgba(0,0,255,1)",
+    normal: '#A8A77A',
+    fire: '#EE8130',
+    water: '#6390F0',
+    electric: '#F7D02C',
+    grass: '#7AC74C',
+    ice: '#96D9D6',
+    fighting: '#C22E28',
+    poison: '#A33EA1',
+    ground: '#E2BF65',
+    flying: '#A98FF3',
+    psychic: '#F95587',
+    bug: '#A6B91A',
+    rock: '#B6A136',
+    ghost: '#735797',
+    dragon: '#6F35FC',
+    dark: '#705746',
+    steel: '#B7B7CE',
+    fairy: '#D685AD',
   };
 
   if (types.length > 1) {
-    cardBorderColor = `linear-gradient(to right, ${typeColors[types[0]]}, ${
-      typeColors[types[1]]
-    })`;
+    cardBorderColor = `linear-gradient(45deg, ${typeColors[types[0]]}, ${typeColors[types[1]]
+      })`;
     console.log(cardBorderColor);
     typeBackground = cardBorderColor;
   } else if (types.length === 1) {
@@ -29,36 +44,40 @@ function Card({ name, number, types }) {
   }
 
   return (
-    <div className={`card`} style={{ border: `3px solid ${cardBorderColor}` }}>
-      <h1>{name}</h1>
-      <h3>#{number}</h3>
-      <Image number={number}></Image>
-      <div
-        className="type"
-        style={{
-          backgroundColor: typeBackground,
-          color: "white",
-        }}
-      >
-        {types[0]}
+    types.length > 1 ?
+      <div className="cardBorder" style={{ backgroundImage: cardBorderColor }}>
+        <div className={`card`}>
+          <h1>{name}</h1>
+          <h3>#{number}</h3>
+          <Image number={number} url={url}></Image>
+          <div
+            className="type"
+            style={{
+              backgroundImage: typeBackground,
+              color: "white",
+            }}
+          >
+            {types.join(' / ')}
+          </div>
+        </div>
       </div>
-    </div>
+      :
+      <div className="cardBorder" style={{ backgroundColor: cardBorderColor }}>
+        <div className={`card`}>
+          <h1>{name}</h1>
+          <h3>#{number}</h3>
+          <Image number={number} url={url}></Image>
+          <div
+            className="type"
+            style={{
+              backgroundColor: typeBackground,
+              color: "white",
+            }}
+          >
+            {types[0]}
+          </div>
+        </div>
+      </div>
   );
 }
 
-// Exported function
-export function Cards() {
-  return (
-    <div className="cards">
-      <Card name="bulbasaur" number="001" types={["grass"]}></Card>
-      <Card name="ivysaur" number="002" types={["grass"]}></Card>
-      <Card name="venusaur" number="003" types={["grass"]}></Card>
-      <Card name="charmander" number="004" types={["fire"]}></Card>
-      <Card name="charmeleon" number="005" types={["fire"]}></Card>
-      <Card name="charizard" number="006" types={["fire"]}></Card>
-      <Card name="squirtle" number="007" types={["water"]}></Card>
-      <Card name="wartortle" number="008" types={["water"]}></Card>
-      <Card name="blaustoise" number="009" types={["water"]}></Card>
-    </div>
-  );
-}
