@@ -1,0 +1,61 @@
+/* Sidebar */
+.sidebar {
+  background-color: #f2f2f2;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  border-radius: 12px;
+}
+
+/* Background color */
+.header-image {
+  padding-top: 20%;
+  border-radius: 12px 12px 50% 50%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Pokemon sprite */
+.header-image img {
+  position: relative;
+  top: 15%;
+}
+
+/* Pokemon name */
+.detail-heading {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 2vw;
+}
+
+.detail-heading h2 {
+  margin: 0;
+  font-size: 4rem;
+  font-weight: 250;
+  width: fit-content;
+}
+
+/* Pokemon number */
+.detail-number {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 2vw;
+}
+
+.detail-number h2 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 200;
+}
+
+/* Pokemon type */
+.detail-type {
+  display: flex;
+  justify-content: center;
+}
+
+.detail-type h2 {
+  margin-top: 1vh;
+  padding: 1vh 5vw;
+  border-radius: 12px;
+  font-weight: 250;
+}

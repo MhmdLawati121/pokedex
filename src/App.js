@@ -1,30 +1,16 @@
 import "./App.css";
-import { FetchData } from "./api";
 import { useState } from "react";
-import { Sidebar } from "./sidebar"
-import { Card } from "./cards"; // Assuming you have a Card component
-
-function title(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function NextBtn({ offset, setOffset }) {
-  function handleClick() { setOffset(offset + 20) }
-  return (
-    <button onClick={handleClick}> Next </button>
-  )
-}
-
-function BackBtn({ offset, setOffset }) {
-  function handleClick() { setOffset(offset - 20) }
-  return (
-    <button onClick={handleClick}> Back </button>
-  )
-}
+import { FetchData } from "./utils/api";
+import { title } from "./utils/utils";
+import { Header } from "./components/Header/Header";
+import { Card } from "./components/Cards/Cards"; // Assuming you have a Card component
+import { Outlet, Link } from "react-router-dom";
+import { NextBtn, BackBtn } from "./components/Pagination/Pagination";
 
 function App() {
   const [pokemonData, setPokemonData] = useState([]);
   const [offset, setOffset] = useState(1);
+  const [pokemonDetails, setPokemonDetails] = useState([]);
 
   const handleResponse = (data) => {
     setPokemonData(data);
@@ -32,6 +18,8 @@ function App() {
 
   return (
     <div className="App">
+      <Header></Header>
+
       <div className="container">
         <FetchData handleResponse={handleResponse} offset={offset} />
         <div className="cards">
@@ -41,12 +29,15 @@ function App() {
               name={title(pokemon.name)}
               number={offset + index} // Assuming the Pokemon number starts from 1
               types={pokemon.types.map((type) => type.type.name)}
-              url={pokemon.sprites.other['official-artwork'].front_default}
+              url={pokemon.sprites.other["official-artwork"].front_default}
+              setPokemonDetails={setPokemonDetails}
+              weight={pokemon.weight}
+              offset={offset}
             />
           ))}
         </div>
-        <Sidebar></Sidebar>
-        <div>
+        <Outlet></Outlet>
+        <div className="pageBtns">
           <BackBtn offset={offset} setOffset={setOffset}></BackBtn>
           <NextBtn offset={offset} setOffset={setOffset}></NextBtn>
         </div>
