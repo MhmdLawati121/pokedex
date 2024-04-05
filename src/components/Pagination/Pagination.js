@@ -7,7 +7,7 @@ function NextBtn({ offset, setOffset }) {
 
 function BackBtn({ offset, setOffset }) {
   function handleClick() {
-    setOffset(offset - 20);
+    if (offset > 20) setOffset(offset - 20);
   }
   return <button onClick={handleClick}> Back </button>;
 }

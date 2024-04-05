@@ -6,6 +6,7 @@ import { Header } from "./components/Header/Header";
 import { Card } from "./components/Cards/Cards"; // Assuming you have a Card component
 import { Outlet, Link } from "react-router-dom";
 import { NextBtn, BackBtn } from "./components/Pagination/Pagination";
+import { Chart } from "./utils/radar";
 
 function App() {
   const [pokemonData, setPokemonData] = useState([]);
@@ -36,6 +37,7 @@ function App() {
             />
           ))}
         </div>
+
         <Outlet></Outlet>
         <div className="pageBtns">
           <BackBtn offset={offset} setOffset={setOffset}></BackBtn>

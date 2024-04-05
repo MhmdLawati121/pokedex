@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-export function FetchData({ name, handleResponse, offset }) {
-  const [data, setData] = useState(null);
+// API request to obtain pokemon data to be displayed in cards
+// Passed Params:
+/* handleResponse: function to save returned data in state
+ * offset: integer representing starting pokemon id, incremented depending on page number
+ */
+export function FetchData({ handleResponse, offset }) {
+  // Error state
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -29,11 +34,35 @@ export function FetchData({ name, handleResponse, offset }) {
   return null;
 }
 
+// API request to get image URL
+// Passed Params:
+/* name: string or integer representing pokemon name / id
+ * setError: function to update error hook
+ */
+async function getUrl(name, setError) {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    const parsedResponse = await response.json();
+    return parsedResponse.sprites?.other["official-artwork"]?.front_default;
+  } catch (err) {
+    setError(err.message);
+  }
+}
+
+// API request to get pokemon details and evolution chain
+// Passed Params:
+/* id: integer representing pokemon id
+ * handleResponse: function to save returned data (excluding evolutions) in state
+ * handleEvolutions: function to save evolution chain in state
+ */
 export function FetchDetails({ id, handleResponse, handleEvolutions }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Get pokemon data
+    // Fetches data of a single pokemon by name/id
     async function fetchJob() {
       try {
         const response = await fetch(
@@ -57,7 +86,7 @@ export function FetchDetails({ id, handleResponse, handleEvolutions }) {
           const parsedSpeciesResponse = await speciesResponse.json();
           /* -------------------------------------------------------------------- */
           try {
-            // Get species data
+            // Fetch data of the pokemon species
             const evoResponse = await fetch(
               `${parsedSpeciesResponse.evolution_chain.url}`
             );
@@ -68,53 +97,78 @@ export function FetchDetails({ id, handleResponse, handleEvolutions }) {
 
             // Extract evolution details
             let evoData = parsedEvoResponse.chain;
+
+            // Store evolution data
+            // The data stored in evoChain in the format:
+            // evoChain = [[base_pokemon Object], [middle_pokemon Object], [final_pokemon Object]]
+            // for example:
+            // evoChain = [[{oddish, 0, oddish.png}], [{gloom, 21, gloom.png}], [{vileplume, null, vileplume.png}, {bellossom, null, bellossom.png}]]
             let evoChain = [];
+            let middleEvo = [];
+            let finalEvo = [];
 
-            const basePokemon = {
-              name: evoData.species.name,
-              level: 0,
-              url: function () {
-                async function getUrl() {
-                  try {
-                    const response = await fetch(
-                      `https://pokeapi.co/api/v2/pokemon/${this.name}/`
-                    );
-                    if (!response.ok) {
-                      throw new Error("Failed to fetch data");
-                    }
-                    const parsedResponse = await response.json();
-                    return parsedResponse.sprites?.other["official-artwork"]
-                      ?.front_default;
-                  } catch (err) {
-                    setError(err.message);
-                  }
-                }
-
-                return parsedResponse.name === this.name
+            // Save base evolution data
+            async function TempUrl(name) {
+              let temp_url =
+                parsedResponse.name === name
                   ? parsedResponse.sprites?.other["official-artwork"]
                       ?.front_default
-                  : getUrl();
+                  : await getUrl(name, setError);
+              return temp_url;
+            }
+            let temp_url = await TempUrl(evoData.species.name);
+
+            const basePokemon = [
+              {
+                name: evoData.species.name,
+                level: 0,
+                url: temp_url,
               },
-            };
+            ];
 
             evoChain.push(basePokemon);
 
-            for (let i = 0; i < evoData.evolves_to.length; i++) {
-              const middle = {
-                name: evoData.evolves_to[i].species.name,
-                level: evoData.evolves_to[i].evolution_details[0].min_level,
-              };
+            // check if middle evolution exists
+            if (evoData.evolves_to[0]) {
+              for (let i = 0; i < evoData.evolves_to.length; i++) {
+                temp_url = await TempUrl(evoData.evolves_to[i].species.name);
+                const middle = {
+                  name: evoData.evolves_to[i].species.name,
+                  level: evoData.evolves_to[i].evolution_details[0].min_level,
+                  url: temp_url,
+                };
+                middleEvo.push(middle);
 
-              const final = {
-                name: evoData.evolves_to[i].evolves_to[0].species.name,
-                level:
-                  evoData.evolves_to[i].evolves_to[0].evolution_details[0]
-                    .min_level,
-              };
-              evoChain.push(middle);
-              evoChain.push(final);
+                // check if third (final) evolution exists
+                if (evoData.evolves_to[i].evolves_to[0]) {
+                  for (
+                    let j = 0;
+                    j < evoData.evolves_to[i].evolves_to.length;
+                    j++
+                  ) {
+                    temp_url = await TempUrl(
+                      evoData.evolves_to[i].evolves_to[j].species.name
+                    );
+                    const final = {
+                      name: evoData.evolves_to[i].evolves_to[j].species.name,
+                      level:
+                        evoData.evolves_to[i].evolves_to[j].evolution_details[0]
+                          .min_level,
+                      url: temp_url,
+                    };
+                    finalEvo.push(final);
+                  }
+                }
+              }
             }
-            console.log(evoChain);
+            if (!(middleEvo.length === 0)) {
+              evoChain.push(middleEvo);
+            }
+
+            if (!(finalEvo.length === 0)) {
+              evoChain.push(finalEvo);
+            }
+
             handleEvolutions(evoChain);
             /* -------------------------------------------------------------------- */
           } catch (error) {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import pokeLoading from "../../media/pokeLoading.png";
 import { Link } from "react-router-dom";
 import { typeColors } from "../../utils/colors";
+import { hexToRgba, lightenColor } from "../../utils/utils";
 
 // Pokemon Image
 function Image({ name, number, url, offset }) {
@@ -50,7 +51,7 @@ function Weight({ weight }) {
   return (
     <div className="pokemon-weight">
       <i class="fa-solid fa-scale-unbalanced-flip"></i>
-      <p>{weight}</p>
+      <p>{weight / 10} kg</p>
     </div>
   );
 }
@@ -65,22 +66,31 @@ export function Card({
   weight,
   offset,
 }) {
-  let cardBorderColor, typeBackground;
+  const primaryTypeColor = typeColors[types[0]];
+  let cardBorderColor, typeBackground, cardColor;
 
   if (types.length > 1) {
-    cardBorderColor = `linear-gradient(45deg, ${typeColors[types[0]]}, ${
+    cardBorderColor = `linear-gradient(45deg, ${primaryTypeColor}, ${
       typeColors[types[1]]
     })`;
     typeBackground = cardBorderColor;
+    cardColor = `linear-gradient(45deg, ${lightenColor(
+      primaryTypeColor,
+      60
+    )}, ${lightenColor(typeColors[types[1]], 60)}`;
   } else if (types.length === 1) {
     cardBorderColor = typeColors[types[0]];
     typeBackground = cardBorderColor;
+    cardColor = lightenColor(primaryTypeColor, 70);
   }
+
+  const cardBackgroundColor = lightenColor(typeColors[types[0]], 80);
+  console.log(cardBackgroundColor);
 
   return types.length > 1 ? (
     <div className="cardBorder" style={{ backgroundImage: cardBorderColor }}>
       <Link to={`pokemon/:${number}`}>
-        <div className={`card`}>
+        <div className={`card`} style={{ backgroundImage: cardColor }}>
           <h1>{name}</h1>
           <h3>#{number}</h3>
           <Image number={number} url={url} offset={offset}></Image>
@@ -100,7 +110,7 @@ export function Card({
   ) : (
     <div className="cardBorder" style={{ backgroundColor: cardBorderColor }}>
       <Link to={`pokemon/:${number}`}>
-        <div className={`card`}>
+        <div className={`card`} style={{ backgroundColor: cardColor }}>
           <h1>{name}</h1>
           <h3>#{number}</h3>
           <Image number={number} url={url}></Image>

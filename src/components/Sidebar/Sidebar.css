@@ -1,9 +1,9 @@
 /* Sidebar */
 .sidebar {
   background-color: #f2f2f2;
-  display: grid;
-  grid-template-rows: 1fr 2fr;
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Background color */
@@ -24,7 +24,6 @@
 .detail-heading {
   display: flex;
   justify-content: flex-start;
-  padding-left: 2vw;
 }
 
 .detail-heading h2 {
@@ -38,10 +37,10 @@
 .detail-number {
   display: flex;
   justify-content: flex-start;
-  padding-left: 2vw;
 }
 
-.detail-number h2 {
+h2 {
+  padding-left: 1vw;
   margin: 0;
   font-size: 2.5rem;
   font-weight: 200;
@@ -50,12 +49,94 @@
 /* Pokemon type */
 .detail-type {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
-.detail-type h2 {
+.detail-type h3 {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
   margin-top: 1vh;
-  padding: 1vh 5vw;
+  width: 200px;
+  padding: 1vh 0;
   border-radius: 12px;
   font-weight: 250;
+}
+
+/* Evolution */
+.evolution-chain {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.evolution-chain-group {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.evolution-chain-group div {
+  margin: 10px auto;
+}
+
+.basic-info {
+  padding: 1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1vh;
+  margin: 2vh 0;
+  font-weight: 300;
+}
+
+.basic-info-main-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.basic-info-icon-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.basic-info p {
+  margin: 1vh;
+}
+
+.abilities-div ul {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5vh 2vw;
+  justify-content: space-around;
+}
+
+.abilities-div li {
+  list-style: none;
+  font-size: 1.2rem;
+  font-weight: 250;
+  background-color: antiquewhite;
+  padding: 2%;
+  border-radius: 12px;
+  width: 9vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stat-chart {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.main-sidebar-section {
+  margin-bottom: 3vh;
 }

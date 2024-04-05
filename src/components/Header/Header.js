@@ -1,5 +1,11 @@
+import logo from "../../media/logo.svg";
+
 function Header() {
-  return <nav>Logo</nav>;
+  return (
+    <nav>
+      <img src={logo}></img>
+    </nav>
+  );
 }
 
 export { Header };
