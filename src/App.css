@@ -1,4 +1,6 @@
 @import url(../src/components/Cards/Cards.css);
+@import url(../src/components/Header/Header.css);
+@import url(../src/components/Footer/Footer.css);
 @import url(../src/components/Pagination/Pagination.css);
 @import url(../src/components/Sidebar/Sidebar.css);
 @import url(../src/utils/radar.css);
@@ -24,19 +26,17 @@ body {
   display: grid;
   grid-template-columns: 4fr 2fr;
   margin: 2vh 5vw;
+  margin-bottom: 0;
   background-color: #fef7f5;
-  border-radius: 12px;
+  border-radius: 12px 12px 0 0;
   padding: 5vh 5vw;
   column-gap: 3vw;
   row-gap: 3vh;
 }
 
-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-nav img {
-  max-height: 15vh;
+.emptySidebar {
+  background-color: #f2f2f2;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
 }

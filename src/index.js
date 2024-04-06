@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "",
-        element: <div></div>,
+        element: <div className="emptySidebar"></div>,
       },
     ],
   },

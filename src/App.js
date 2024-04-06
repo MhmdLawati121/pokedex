@@ -3,7 +3,8 @@ import { useState } from "react";
 import { FetchData } from "./utils/api";
 import { title } from "./utils/utils";
 import { Header } from "./components/Header/Header";
-import { Card } from "./components/Cards/Cards"; // Assuming you have a Card component
+import { Card } from "./components/Cards/Cards";
+import { Footer } from "./components/Footer/Footer";
 import { Outlet, Link } from "react-router-dom";
 import { NextBtn, BackBtn } from "./components/Pagination/Pagination";
 import { Chart } from "./utils/radar";
@@ -32,9 +33,9 @@ function App() {
         <div className="cards">
           {pokemonData.map((pokemon, index) => (
             <Card
-              key={index} // Assuming each card needs a unique key
+              key={index}
               name={title(pokemon.name)}
-              number={offset + index} // Assuming the Pokemon number starts from 1
+              number={offset + index}
               types={pokemon.types.map((type) => type.type.name)}
               url={pokemon.sprites.other["official-artwork"].front_default}
               setPokemonDetails={setPokemonDetails}
@@ -50,6 +51,7 @@ function App() {
           <NextBtn offset={offset} setOffset={setOffset}></NextBtn>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }

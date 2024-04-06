@@ -10,15 +10,15 @@
 
 ## Table of Contents 🗂️
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [Features](#features)
+- [Installation](#installation-🚀)
+- [Usage](#usage-📖)
+- [Credits](#credits-🙏)
+- [Features](#features-🌟)
 
 ## Installation 🚀
 
 - Install [Node JS](https://nodejs.org/en/download)
-- Clone the repository by running the command `` in your terminal.
+- Clone the repository by running the command `git clone https://github.com/MhmdLawati121/pokedex.git` in your terminal.
 - Run the command `npm install` in the terminal: This will install all necessary dependecies on your local machine.
 - To run the server in development mode, run the command `npm run start` in the terminal.
 - To build the project, run the command `npm run build`.

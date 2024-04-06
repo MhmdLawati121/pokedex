@@ -13,7 +13,6 @@ import icons from "../../media/icons";
 
 // Component for displaying pokemon image
 function LargeImage({ url, types }) {
-  const iconUrl = "../../media/icons/dark.svg";
   return (
     <div
       className="header-image"
@@ -22,6 +21,7 @@ function LargeImage({ url, types }) {
       }}
     >
       <img
+        className="pokemonLargeImage"
         src={url}
         alt="detailed view"
         width="350px"
@@ -33,9 +33,6 @@ function LargeImage({ url, types }) {
         alt="detailed view"
         width="250px"
         style={{
-          position: "absolute",
-          top: "30%",
-          right: "15%",
           border: `solid 3px ${typeColors[types[0]]}`,
         }}
       ></img>

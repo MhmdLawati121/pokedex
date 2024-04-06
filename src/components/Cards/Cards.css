@@ -33,7 +33,7 @@
   transform: translateY(-15px);
 }
 
-a {
+.cards a {
   text-decoration: none; /* Remove underline */
   padding: 0; /* Remove default padding */
   margin: 0;

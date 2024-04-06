@@ -1,0 +1,33 @@
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav img {
+  max-height: 15vh;
+}
+
+.searchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1vw;
+}
+
+.searchButton button {
+  display: none;
+}
+
+.searchForm input {
+  background-image: url("../../media/search.svg");
+  background-repeat: no-repeat;
+  background-position: 13px;
+  padding: 1vh 2vw;
+  background-color: #fef7f5;
+  border: 1px lightgray solid;
+  border-radius: 0.7rem;
+  display: flex;
+  text-align: center;
+}
