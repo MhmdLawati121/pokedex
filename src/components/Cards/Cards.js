@@ -56,6 +56,27 @@ function Weight({ weight }) {
   );
 }
 
+// Pokemon Name
+function Name({ name }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  return loading ? <div class="loader"></div> : <h1>{name}</h1>;
+}
+
+// Pokemon Number
+function Number({ number }) {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  return loading ? <div class="loader"></div> : <h3>#{number}</h3>;
+}
+
 // Pokemon Card
 export function Card({
   name,
@@ -91,8 +112,8 @@ export function Card({
     <div className="cardBorder" style={{ backgroundImage: cardBorderColor }}>
       <Link to={`pokemon/:${number}`}>
         <div className={`card`} style={{ backgroundImage: cardColor }}>
-          <h1>{name}</h1>
-          <h3>#{number}</h3>
+          <Name name={name}></Name>
+          <Number number={number}></Number>
           <Image number={number} url={url} offset={offset}></Image>
           <Weight weight={weight}></Weight>
           <div
@@ -111,8 +132,8 @@ export function Card({
     <div className="cardBorder" style={{ backgroundColor: cardBorderColor }}>
       <Link to={`pokemon/:${number}`}>
         <div className={`card`} style={{ backgroundColor: cardColor }}>
-          <h1>{name}</h1>
-          <h3>#{number}</h3>
+          <Name name={name}></Name>
+          <Number number={number}></Number>
           <Image number={number} url={url}></Image>
           <Weight weight={weight}></Weight>
 

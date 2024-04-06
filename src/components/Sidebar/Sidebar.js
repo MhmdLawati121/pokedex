@@ -5,7 +5,7 @@ import { typeColors } from "../../utils/colors";
 import { Link } from "react-router-dom";
 import { Chart } from "../../utils/radar";
 import { hexToRgba, title } from "../../utils/utils";
-import pokeBackground from "../../media/pokeLoading.png";
+import icons from "../../media/icons";
 
 //------------------------//
 //------ Components ------//
@@ -13,18 +13,32 @@ import pokeBackground from "../../media/pokeLoading.png";
 
 // Component for displaying pokemon image
 function LargeImage({ url, types }) {
+  const iconUrl = "../../media/icons/dark.svg";
   return (
     <div
       className="header-image"
       style={{
         backgroundColor: hexToRgba(typeColors[types[0]], 0.8),
-        backgroundImage: `url(${pokeBackground})`,
-        backgroundSize: "60% 70%",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "150% -40%",
       }}
     >
-      <img src={url} alt="detailed view" width="350px"></img>
+      <img
+        src={url}
+        alt="detailed view"
+        width="350px"
+        style={{ position: "relative", zIndex: 1 }}
+      ></img>
+      <img
+        src={icons[types[0]]}
+        className="icon"
+        alt="detailed view"
+        width="250px"
+        style={{
+          position: "absolute",
+          top: "30%",
+          right: "15%",
+          border: `solid 3px ${typeColors[types[0]]}`,
+        }}
+      ></img>
     </div>
   );
 }

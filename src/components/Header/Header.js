@@ -1,4 +1,4 @@
-import logo from "../../media/logo.svg";
+import logo from "../../media/Pokedex.png";
 
 function Header() {
   return (

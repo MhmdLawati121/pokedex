@@ -12,6 +12,7 @@ function App() {
   const [pokemonData, setPokemonData] = useState([]);
   const [offset, setOffset] = useState(1);
   const [pokemonDetails, setPokemonDetails] = useState([]);
+  const [cachedData, setCachedData] = useState({});
 
   const handleResponse = (data) => {
     setPokemonData(data);
@@ -22,7 +23,12 @@ function App() {
       <Header></Header>
 
       <div className="container">
-        <FetchData handleResponse={handleResponse} offset={offset} />
+        <FetchData
+          handleResponse={handleResponse}
+          offset={offset}
+          cachedData={cachedData}
+          setCachedData={setCachedData}
+        />
         <div className="cards">
           {pokemonData.map((pokemon, index) => (
             <Card

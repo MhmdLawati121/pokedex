@@ -124,7 +124,7 @@ h2 {
   background-color: antiquewhite;
   padding: 2%;
   border-radius: 12px;
-  width: 9vw;
+  min-width: 7vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,4 +139,11 @@ h2 {
 
 .main-sidebar-section {
   margin-bottom: 3vh;
+}
+
+.icon {
+  opacity: 0.5;
+  border: solid 1px;
+  border-radius: 50%;
+  padding: 10px;
 }

@@ -5,18 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { useParams } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-const PokemonDetails = () => {
-  const { pokemonId } = useParams();
-
-  // Use the pokemonId to fetch data or display details
-  return (
-    <div>
-      <h1>Viewing Pokemon: {pokemonId}</h1>
-      {/* Display details based on pokemonId */}
-    </div>
-  );
-};
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -27,12 +18,18 @@ const router = createBrowserRouter([
         path: "pokemon/:pokemonId",
         element: <Sidebar></Sidebar>,
       },
+      {
+        path: "",
+        element: <div></div>,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );

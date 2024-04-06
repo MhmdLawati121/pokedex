@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // API request to obtain pokemon data to be displayed in cards
 // Passed Params:
 /* handleResponse: function to save returned data in state
  * offset: integer representing starting pokemon id, incremented depending on page number
  */
-export function FetchData({ handleResponse, offset }) {
-  // Error state
+export function FetchData({
+  handleResponse,
+  offset,
+  cachedData,
+  setCachedData,
+}) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -14,14 +18,23 @@ export function FetchData({ handleResponse, offset }) {
       try {
         const pokemonData = [];
         for (let i = offset; i < offset + 20; i++) {
-          const response = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${i}/`
-          );
-          if (!response.ok) {
-            throw new Error("Failed to fetch data");
+          const cachedPokemon = cachedData[i];
+          if (cachedPokemon) {
+            pokemonData.push(cachedPokemon);
+          } else {
+            const response = await fetch(
+              `https://pokeapi.co/api/v2/pokemon/${i}/`
+            );
+            if (!response.ok) {
+              throw new Error("Failed to fetch data");
+            }
+            const parsedResponse = await response.json();
+            pokemonData.push(parsedResponse);
+            setCachedData((prevCachedData) => ({
+              ...prevCachedData,
+              [i]: parsedResponse,
+            }));
           }
-          const parsedResponse = await response.json();
-          pokemonData.push(parsedResponse);
         }
         handleResponse(pokemonData);
       } catch (err) {
