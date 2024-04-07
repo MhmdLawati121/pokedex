@@ -1,3 +1,7 @@
+/**
+ * Imported from (https://gist.github.com/apaleslimghost/0d25ec801ca4fc43317bcff298af43c3)
+ */
+
 export const typeColors = {
   normal: "#A8A77A",
   fire: "#EE8130",

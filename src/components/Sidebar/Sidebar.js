@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { FetchData, FetchDetails } from "../../utils/api";
+import { FetchDetails } from "../../utils/api";
 import { useState } from "react";
 import { typeColors } from "../../utils/colors";
 import { Link } from "react-router-dom";
@@ -11,7 +11,14 @@ import icons from "../../media/icons";
 //------ Components ------//
 //------------------------//
 
-// Component for displaying pokemon image
+/**
+ * Ccomponent to display Pokemon image with its type icon.
+ *
+ * @param {Object} props - Props object
+ * @param {string} props.url - Image URL
+ * @param {Array} props.types - Pokemon type(s)
+ * @returns {JSX.Element} - JSX element representing the image
+ */
 function LargeImage({ url, types }) {
   return (
     <div
@@ -40,7 +47,13 @@ function LargeImage({ url, types }) {
   );
 }
 
-// Component for displaying evolution chain
+/**
+ * Component to display the evolution chain of a Pokemon
+ *
+ * @param {Object} props - Props object
+ * @param {Array} props.evolutionData - Evolution data of the Pokemon
+ * @returns {JSX.Element} - JSX element representing the evolution chain
+ */
 function Evolution({ evolutionData }) {
   const renderEvolutionChain = () => {
     return evolutionData.map((chain, index) => (
@@ -69,7 +82,14 @@ function Evolution({ evolutionData }) {
   );
 }
 
-// Component for displaying pokemon details
+/**
+ * Component to display the name and number of a Pokemon.
+ *
+ * @param {Object} props - Props object
+ * @param {string} props.name - Pokemon name
+ * @param {number} props.number - Pokemon number
+ * @returns {JSX.Element} - JSX element representing the name and number of the Pokemon
+ */
 function NameAndNumber({ name, number }) {
   if (number < 10) number = "N°000" + number;
   else if (number < 100) number = "N°00" + number;
@@ -87,7 +107,13 @@ function NameAndNumber({ name, number }) {
   );
 }
 
-// Component for displaying Pokemon type
+/**
+ * Component to display the types of a Pokemon
+ *
+ * @param {Object} props - Props object
+ * @param {Array} props.types - Pokemon Types
+ * @returns {JSX.Element} - JSX element representing the types of the Pokemon
+ */
 function Type({ types }) {
   const typeGraphics = types.map((type) => (
     <h3 style={{ backgroundColor: typeColors[type] }}>{type}</h3>
@@ -95,7 +121,14 @@ function Type({ types }) {
   return <div className="detail-type">{typeGraphics}</div>;
 }
 
-// Component for displaying Pokemon stats
+/**
+ * Component to display the stats of a Pokemon
+ *
+ * @param {Object} props - Props object
+ * @param {Array} props.stats - Pokemon stats
+ * @param {string} props.mainType - Pokemon primary/main type
+ * @returns {JSX.Element} - JSX element representing the stats of the Pokemon
+ */
 function Stats({ stats, mainType }) {
   const datasets = {
     data: [],
@@ -119,23 +152,47 @@ function Stats({ stats, mainType }) {
 //---------------------------------------//
 //------ Basic Pokemon information ------//
 //---------------------------------------//
-
+/**
+ * Component to display the height of a Pokemon
+ *
+ * @param {Object} props - Props object
+ * @param {number} props.weight - Pokemon height
+ * @returns {JSX.Element} - The JSX element representing Pokemon height
+ */
 // Component for displaying Pokemon height
 function Height({ height }) {
   return <p>{height / 10} m</p>;
 }
 
-// Component for displaying Pokemon weight
+/**
+ * Component to display the weight of a Pokemon
+ *
+ * @param {Object} props - Props object
+ * @param {number} props.weight - Pokemon weight
+ * @returns {JSX.Element} - The JSX element representing Pokemon weight
+ */
 function Weight({ weight }) {
   return <p>{weight / 10} kg</p>;
 }
 
-// Component for displaying Pokemon base experience
-function Base_Expreience({ base_experience }) {
+/**
+ * Component to display the base experience of a Pokemon
+ *
+ * @param {Object} props - Props object
+ * @param {number} props.base_experience - Base experience of Pokemon
+ * @returns {JSX.Element} - The JSX element representing the base experience of the Pokemon
+ */
+function BaseExpreience({ base_experience }) {
   return <p>{base_experience} xp</p>;
 }
 
-// Component for displaying Pokemon abilities
+/**
+ * Component to display the abilities of a Pokemon
+ *
+ * @param {Object} props - Props object
+ * @param {Array} props.abilities - Pokemon abilities
+ * @returns {JSX.Element} - JSX element representing the abilities of the Pokemon
+ */
 function Abilities({ abilities }) {
   const abilitiesList = abilities.map((ability) => (
     <li>{ability.ability.name}</li>
@@ -148,8 +205,16 @@ function Abilities({ abilities }) {
   );
 }
 
-// Component for displaying all Pokemon basic information
-function PokemonBasicInfo({ abilities, weight, height, base_experience }) {
+/**
+ * Component to display all basic information of a Pokemon
+ *
+ * @param {Object} props - Props object
+ * @param {number} props.weight - Pokemon weight
+ * @param {number} props.height - Pokemon height
+ * @param {number} props.base_experience - Pokemon base exp.
+ * @returns {JSX.Element} - JSX element representing all basic information of the Pokemon
+ */
+function PokemonBasicInfo({ weight, height, base_experience }) {
   return (
     <div className="basic-info main-sidebar-section">
       <div className="basic-info-main-div">
@@ -163,14 +228,20 @@ function PokemonBasicInfo({ abilities, weight, height, base_experience }) {
         </div>
         <div className="basic-info-icon-div">
           <i class="fa-solid fa-bars-progress"></i>
-          <Base_Expreience base_experience={base_experience}></Base_Expreience>
+          <BaseExpreience base_experience={base_experience}></BaseExpreience>
         </div>
       </div>
     </div>
   );
 }
 
-// Component for displaying Pokemon graphic details
+/**
+ * Component to display entire pokemon graphic
+ *
+ * @param {Object} props - Props object
+ * @param {Object} props.pokemonData - All pokemon data
+ * @returns {JSX.Element} - JSX element representing graphic data of Pokemon
+ */
 function PokemonGraphic({ pokemonData }) {
   const name = pokemonData.name;
   const number = pokemonData.id;
@@ -203,7 +274,11 @@ function PokemonGraphic({ pokemonData }) {
 //------ Exported Component ------//
 //--------------------------------//
 
-// Main Sidebar Component
+/**
+ * Component for the sidebar
+ *
+ * @returns {JSX.Element} - JSX element representing the main sidebar
+ */
 export function Sidebar() {
   const [pokemonData, setPokemonData] = useState({});
   const [evolutionData, setEvolutionData] = useState([]);

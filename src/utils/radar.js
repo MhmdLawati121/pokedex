@@ -19,14 +19,21 @@ ChartJS.register(
   Legend
 );
 
+/**
+ * Component for rendering a Radar chart
+ * @param {Object} datasets - Datasets to be plotted on chart
+ * @param {Array} datasets.data - Data points to be plotted on chart
+ * @param {string} datasets.backgroundColor - Radar chart background color
+ * @param {string} datasets.borderColor - Radar chart border color
+ * @returns {JSX.Element} - JSX element to display chart
+ */
 export function Chart({ datasets }) {
   const labels = ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"];
+  let maxValue = 150;
 
   // Check if any value in the data is greater than 150
   if (datasets.data.some((x) => x > 150)) {
-    var maxValue = Math.max(...datasets.data);
-  } else {
-    var maxValue = 150;
+    maxValue = Math.max(...datasets.data);
   }
 
   console.log("The maximum value is:", maxValue);
@@ -39,7 +46,7 @@ export function Chart({ datasets }) {
         ticks: {
           stepSize: 50, // Set the step size to 50
           callback: function (value) {
-            return value; // Optionally, you can customize the tick labels here
+            return value;
           },
         },
       },

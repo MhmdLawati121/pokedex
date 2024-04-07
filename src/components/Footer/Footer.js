@@ -1,3 +1,9 @@
+/**
+ * Component to display page footer
+ *
+ * @returns {JSX.Element} - The JSX element representing the footer
+ */
+
 function Footer() {
   return (
     <footer>

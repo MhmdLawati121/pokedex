@@ -1,3 +1,7 @@
+/**
+ * Icon SVGs imported from https://github.com/duiker101/pokemon-type-svg-icons/tree/master
+ */
+
 import bug from "./bug.svg";
 import dark from "./dark.svg";
 import dragon from "./dragon.svg";
@@ -17,7 +21,7 @@ import rock from "./rock.svg";
 import steel from "./steel.svg";
 import water from "./water.svg";
 
-export default {
+const icons = {
   bug,
   dark,
   dragon,
@@ -37,3 +41,5 @@ export default {
   steel,
   water,
 };
+
+export default icons;

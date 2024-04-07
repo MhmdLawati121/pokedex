@@ -2,6 +2,13 @@
   display: flex;
   justify-content: space-around;
 }
+
+/*
+ button design from: 
+    https://getcssscan.com/css-buttons-examples
+    button number 83
+    by 'react-hot-toast'
+*/
 .pageBtns button {
   appearance: button;
   background-color: transparent;

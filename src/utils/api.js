@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 
-// API request to obtain pokemon data to be displayed in cards
-// Passed Params:
-/* handleResponse: function to save returned data in state
- * offset: integer representing starting pokemon id, incremented depending on page number
+/**
+ * Component for fetching Pokemon data
+ *
+ * @param {Object} props - Props object
+ * @param {Function} props.handleResponse - Function to save returned data in state
+ * @param {number} props.offset - Number representing starting Pokemon ID
+ * @param {Object} props.cachedData - Cached Pokemon data
+ * @param {Function} props.setCachedData - Function to set cached Pokemon data
+ * @returns {JSX.Element} - JSX element representing the fetching component
  */
+
 export function FetchData({
   handleResponse,
   offset,
@@ -13,6 +19,7 @@ export function FetchData({
 }) {
   const [error, setError] = useState(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     async function fetchJob() {
       try {
@@ -42,15 +49,22 @@ export function FetchData({
       }
     }
     fetchJob();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return null;
 }
 
-// API request to get image URL
-// Passed Params:
-/* name: string or integer representing pokemon name / id
- * setError: function to update error hook
+/**
+ * Function to get the URL of a Pokemon image
+ *
+ * @param {string|number} name - Pokemon name or ID
+ * @param {Function} setError - Function to update the error hook
+ * @returns {Promise<string>} - URL of the Pokemon image
  */
 async function getUrl(name, setError) {
   try {
@@ -65,12 +79,16 @@ async function getUrl(name, setError) {
   }
 }
 
-// API request to get pokemon details and evolution chain
-// Passed Params:
-/* id: integer representing pokemon id
- * handleResponse: function to save returned data (excluding evolutions) in state
- * handleEvolutions: function to save evolution chain in state
+/**
+ * Component for fetching Pokemon data
+ *
+ * @param {Object} props - Props object
+ * @param {number} props.id - Number representing Pokemon ID
+ * @param {Function} props.handleResponse - Function to save returned data (except evos)
+ * @param {Function} props.handleEvolutions - Function to save evolution data
+ * @returns {JSX.Element} - JSX element representing the fetching component
  */
+
 export function FetchDetails({ id, handleResponse, handleEvolutions }) {
   const [error, setError] = useState(null);
 
@@ -116,6 +134,7 @@ export function FetchDetails({ id, handleResponse, handleEvolutions }) {
             // evoChain = [[base_pokemon Object], [middle_pokemon Object], [final_pokemon Object]]
             // for example:
             // evoChain = [[{oddish, 0, oddish.png}], [{gloom, 21, gloom.png}], [{vileplume, null, vileplume.png}, {bellossom, null, bellossom.png}]]
+            // eevee works similarly: [[{eevee Object}], [{vaporeon Object}, {flareon Object}, ....]]
             let evoChain = [];
             let middleEvo = [];
             let finalEvo = [];
@@ -197,7 +216,12 @@ export function FetchDetails({ id, handleResponse, handleEvolutions }) {
       }
     }
     fetchJob();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  if (error) {
+    console.log(error);
+  }
 
   return null;
 }

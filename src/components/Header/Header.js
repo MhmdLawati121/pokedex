@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../media/Pokedex.png";
 
+/**
+ * Component to display the searchbar
+ *
+ * @returns {JSX.Element} - The JSX element represnting the search bar
+ */
 const SearchForm = () => {
   const [inputValue, setInputValue] = useState("");
 
+  // Automatically set user input to lower case for correct API format
   const handleChange = (e) => {
     setInputValue(e.target.value.toLowerCase());
   };
@@ -28,11 +34,16 @@ const SearchForm = () => {
   );
 };
 
+/**
+ * Component to display page header
+ *
+ * @returns {JSX.Element} - The JSX element representing the header and logo of the page
+ */
 function Header() {
   return (
     <>
       <nav>
-        <img src={logo}></img>
+        <img src={logo} alt={'"Pokedex" Logo'}></img>
       </nav>
       <SearchForm></SearchForm>
     </>

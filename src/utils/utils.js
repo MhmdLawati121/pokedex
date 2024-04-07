@@ -18,6 +18,8 @@ function hexToRgba(hex, opacity) {
   }
 }
 
+// Reduce color strength?
+// i.e. Add white to the color
 function lightenColor(color, amount) {
   // Convert hex to RGB values
   const rgb = color

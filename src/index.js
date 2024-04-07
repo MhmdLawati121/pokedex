@@ -1,14 +1,11 @@
+import "./index.css";
+import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { useParams } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const queryClient = new QueryClient();
-
+// react-router-dom used for client side routing
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,8 +25,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
