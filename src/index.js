@@ -17,7 +17,15 @@ const router = createBrowserRouter([
       },
       {
         path: "",
-        element: <div className="emptySidebar"></div>,
+        element: (
+          <div class="emptySidebar">
+            <div className="instruction-container">
+              <div className="instruction">
+                <h1>Click on a Pokemon to view its details</h1>
+              </div>
+            </div>
+          </div>
+        ),
       },
     ],
   },

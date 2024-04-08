@@ -28,7 +28,7 @@
   border-radius: 50%;
   padding: 10px;
   position: absolute;
-  bottom: 26vh;
+  bottom: 28vh;
 }
 
 /* Pokemon name */
@@ -162,7 +162,6 @@ h2 {
 .main-sidebar-section {
   margin-bottom: 3vh;
 }
-
 
 /*Instructions*/
 
