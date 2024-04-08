@@ -223,11 +223,11 @@ function PokemonBasicInfo({ weight, height, base_experience }) {
     <div className="basic-info main-sidebar-section">
       <div className="basic-info-main-div">
         <div className="basic-info-icon-div">
-          <i class="fa-solid fa-ruler"></i>
+          <i class="fa-solid fa-scale-unbalanced-flip"></i>
           <Weight weight={weight}></Weight>
         </div>
         <div className="basic-info-icon-div">
-          <i class="fa-solid fa-scale-unbalanced-flip"></i>
+          <i class="fa-solid fa-ruler"></i>
           <Height height={height}></Height>
         </div>
         <div className="basic-info-icon-div">
