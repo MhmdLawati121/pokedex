@@ -24,7 +24,7 @@ const SearchForm = () => {
           type="text"
           value={inputValue}
           onChange={handleChange}
-          placeholder="Enter Pokemon"
+          placeholder="Search for Pokemon"
         />
         <Link to={redirectLink} className="searchButton">
           <button>Go</button>

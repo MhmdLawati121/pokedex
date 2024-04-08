@@ -78,7 +78,11 @@ function Evolution({ evolutionData }) {
       <div className="evolution-chain">{renderEvolutionChain()}</div>
     </div>
   ) : (
-    <button disabled>Loading...</button>
+    <div className="instruction-container">
+      <div className="instruction">
+        <h1>Click on a Pokemon to view its details</h1>
+      </div>
+    </div>
   );
 }
 

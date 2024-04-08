@@ -144,7 +144,7 @@ export function FetchDetails({ id, handleResponse, handleEvolutions }) {
               let temp_url =
                 parsedResponse.name === name
                   ? parsedResponse.sprites?.other["official-artwork"]
-                      ?.front_default
+                    ?.front_default
                   : await getUrl(name, setError);
               return temp_url;
             }

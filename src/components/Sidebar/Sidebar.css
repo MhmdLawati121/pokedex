@@ -4,7 +4,10 @@
   border-radius: 0.7rem;
   display: flex;
   flex-direction: column;
+  max-width: 1fr;
 }
+
+/******************************/
 
 /* Background color */
 .header-image {
@@ -17,6 +20,15 @@
 /* Pokemon sprite */
 .pokemonLargeImage {
   position: relative;
+}
+
+.icon {
+  opacity: 0.5;
+  border: solid 1px;
+  border-radius: 50%;
+  padding: 10px;
+  position: absolute;
+  bottom: 26vh;
 }
 
 /* Pokemon name */
@@ -45,6 +57,8 @@ h2 {
   font-weight: 200;
 }
 
+/******************************/
+
 /* Pokemon type */
 .detail-type {
   display: flex;
@@ -62,23 +76,9 @@ h2 {
   font-weight: 250;
 }
 
-/* Evolution */
-.evolution-chain {
-  display: flex;
-  justify-content: space-evenly;
-}
+/******************************/
 
-.evolution-chain-group {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
-.evolution-chain-group div {
-  margin: 10px auto;
-}
-
+/* Basic info (height, weight, abilites)*/
 .basic-info {
   padding: 1vh;
   display: flex;
@@ -111,9 +111,10 @@ h2 {
 
 .abilities-div ul {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 0.2vh 1vw;
-  justify-content: space-around;
+  align-items: center;
+  gap: 5px;
 }
 
 .abilities-div li {
@@ -123,12 +124,34 @@ h2 {
   background-color: antiquewhite;
   padding: 0.7rem;
   border-radius: 0.7rem;
-  min-width: 7vw;
   display: flex;
+  width: 50%;
   justify-content: center;
   align-items: center;
 }
 
+/******************************/
+
+/* Evolution */
+.evolution-chain {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.evolution-chain-group {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.evolution-chain-group div {
+  margin: 10px auto;
+}
+
+/******************************/
+
+/*stats radar chart*/
 .stat-chart {
   width: 100%;
   display: flex;
@@ -140,11 +163,18 @@ h2 {
   margin-bottom: 3vh;
 }
 
-.icon {
-  opacity: 0.5;
-  border: solid 1px;
-  border-radius: 50%;
-  padding: 10px;
-  position: absolute;
-  bottom: 30vh;
+
+/*Instructions*/
+
+.instruction-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 100%;
+}
+
+.instruction h1 {
+  text-align: center;
+  font-weight: 200;
 }
